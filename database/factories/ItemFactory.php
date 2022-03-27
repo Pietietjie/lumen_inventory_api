@@ -25,7 +25,7 @@ class ItemFactory extends Factory
             'name'           => $this->faker->word,
             'ean13_bar_code' => $this->faker->unique()->ean13(),
             'default_price'  => $this->faker->numberBetween(100, 5000),
-            'default_markup' => $this->faker->numberBetween(1, 100),
+            'default_markup' => $this->faker->numberBetween(1, 100)/100,
         ];
     }
 }

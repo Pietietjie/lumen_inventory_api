@@ -35,7 +35,7 @@ class InventoryFactory extends Factory
             'store_id'          => Store::inRandomOrder()->first()->id,
             'item_quantity'     => $this->faker->numberBetween(10, 10000),
             'store_item_price'  => $this->faker->numberBetween($item->default_price, 5000),
-            'store_item_markup' => $this->faker->numberBetween($item->default_markup, 100),
+            'store_item_markup' => $this->faker->numberBetween($item->default_markup, 100)/100,
         ];
     }
 }

@@ -10,6 +10,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Item extends Model {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'name', 'default_price', 'default_markup',
+    ];
+
     public function inventories(): HasMany
     {
         return $this->hasMany(Inventory::class);

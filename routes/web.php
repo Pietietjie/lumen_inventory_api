@@ -6,7 +6,9 @@ $router->group([
 
     require 'authentication.php';
 
-    $router->get('/', function () use ($router) {
-        return $router->app->version();
+    $router->group([
+        'middleware' => 'auth',
+    ], function () use ($router) {
+        require 'items.php';
     });
 });
