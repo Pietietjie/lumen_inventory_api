@@ -45,7 +45,16 @@ class ItemController extends Controller
                 $item->save();
             }
             return response()->json([
-                'item' => $item->only(['name', 'ean13_bar_code', 'default_price', 'default_markup',]),
+                'item' => $item->only([
+                    'name',
+                    'ean13_bar_code',
+                    'default_price',
+                    'default_markup',
+                    'default_markup_price',
+                    'display_default_markup_price',
+                    'default_sell_price',
+                    'display_default_sell_price',
+                ]),
                 'message' => 'Item Added'
             ], 201);
         } catch (\Exception $e) {
@@ -78,7 +87,16 @@ class ItemController extends Controller
             ]);
 
             return response()->json([
-                'item' => $item->only(['name', 'ean13_bar_code', 'default_price', 'default_markup',]),
+                'item' => $item->only([
+                    'name',
+                    'ean13_bar_code',
+                    'default_price',
+                    'default_markup',
+                    'default_markup_price',
+                    'display_default_markup_price',
+                    'default_sell_price',
+                    'display_default_sell_price',
+                ]),
                 'message' => 'Item Updated'
             ], 202);
         } catch (\Exception $e) {

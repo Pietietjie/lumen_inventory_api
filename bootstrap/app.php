@@ -64,6 +64,7 @@ array_map(function($config) use ($app) {
 }, array_merge([
     'app',
     'auth',
+    'currency',
 ]));
 
 /*
