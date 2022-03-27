@@ -25,10 +25,14 @@ class ItemControllerTest extends TestCase
         ]);
         $response->seeJson([
             'item' => [
-                'name'           => 'Test product',
-                'ean13_bar_code' => '9999999999999',
-                'default_price'  => 200,
-                'default_markup' => .5,
+                'name'                         => 'Test product',
+                'ean13_bar_code'               => '9999999999999',
+                'default_price'                => 200,
+                'default_markup'               => .5,
+                'default_markup_price'         => 100,
+                'default_sell_price'           => 300,
+                'display_default_markup_price' => 'R100.00',
+                'display_default_sell_price'   => 'R300.00',
             ],
             'message' => 'Item Added',
         ]);
@@ -50,10 +54,14 @@ class ItemControllerTest extends TestCase
         ]);
         $response->seeJson([
             'item' => [
-                'name'           => 'Test product',
-                'ean13_bar_code' => '9999999999999',
-                'default_price'  => 200,
-                'default_markup' => .5,
+                'name'                         => 'Test product',
+                'ean13_bar_code'               => '9999999999999',
+                'default_price'                => 200,
+                'default_markup'               => .5,
+                'default_markup_price'         => 100,
+                'default_sell_price'           => 300,
+                'display_default_markup_price' => 'R100.00',
+                'display_default_sell_price'   => 'R300.00',
             ],
             'message' => 'Item Added',
         ]);
@@ -110,10 +118,14 @@ class ItemControllerTest extends TestCase
         ]);
         $response->seeJson([
             'item' => [
-                'name'           => 'Test product',
-                'ean13_bar_code' => '9999999999999',
-                'default_price'  => 200,
-                'default_markup' => .5,
+                'name'                         => 'Test product',
+                'ean13_bar_code'               => '9999999999999',
+                'default_price'                => 200,
+                'default_markup'               => .5,
+                'default_markup_price'         => 100,
+                'default_sell_price'           => 300,
+                'display_default_markup_price' => 'R100.00',
+                'display_default_sell_price'   => 'R300.00',
             ],
             'message' => 'Item Updated',
         ]);
