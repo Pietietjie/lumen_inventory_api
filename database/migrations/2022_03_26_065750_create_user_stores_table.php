@@ -17,7 +17,7 @@ class CreateUserStoresTable extends Migration
             $table->id();
             $table->foreignId('store_id')->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->boolean('store_manager')->default(0);
+            $table->boolean('user_main_store')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

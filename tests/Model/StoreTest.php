@@ -35,26 +35,26 @@ class StoreTest extends TestCase
         $this->assertEquals($user->id, $storeUsers->first()->id);
     }
 
-    public function testStoreRelationshipManagerUsers()
+    public function testStoreRelationshipMainStoreUsers()
     {
         $user = User::factory()->create();
         $this->store->users()->attach($user->id, [
-            'store_manager' => true,
+            'user_main_store' => true,
         ]);
 
-        $storeUsers = $this->store->managerUsers;
+        $storeUsers = $this->store->mainStoreUsers;
         $this->assertCount(1, $storeUsers);
         $this->assertEquals($user->id, $storeUsers->first()->id);
     }
 
-    public function testStoreRelationshipManagerUsersForNonManagerRelation()
+    public function testStoreRelationshipMainStoreUsersForNonManagerRelation()
     {
         $user = User::factory()->create();
         $this->store->users()->attach($user->id, [
-            'store_manager' => false,
+            'user_main_store' => false,
         ]);
 
-        $storeUsers = $this->store->managerUsers;
+        $storeUsers = $this->store->mainStoreUsers;
         $this->assertCount(0, $storeUsers);
     }
 

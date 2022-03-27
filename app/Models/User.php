@@ -37,13 +37,15 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function stores(): BelongsToMany
     {
-        return $this->belongsToMany(Store::class, 'user_stores');
+        return $this->belongsToMany(Store::class, 'user_stores')
+            ->withPivot(['user_main_store']);
     }
 
-    public function managingStores(): BelongsToMany
+    public function mainStore(): BelongsToMany
     {
         return $this->belongsToMany(Store::class, 'user_stores')
-            ->wherePivot('store_manager', true);
+            ->withPivot(['user_main_store'])
+            ->wherePivot('user_main_store', true);
     }
 
     /**

@@ -22,13 +22,15 @@ class Store extends Model {
     }
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'user_stores');
+        return $this->belongsToMany(User::class, 'user_stores')
+            ->withPivot(['user_main_store']);
     }
 
-    public function managerUsers(): BelongsToMany
+    public function mainStoreUsers(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'user_stores')
-            ->wherePivot('store_manager', true);
+            ->withPivot(['user_main_store'])
+            ->wherePivot('user_main_store', true);
     }
 
     public function inventories(): HasMany
