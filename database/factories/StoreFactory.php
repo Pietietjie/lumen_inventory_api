@@ -21,14 +21,8 @@ class StoreFactory extends Factory
      */
     public function definition()
     {
-        // This format will generate store codes as in the following examples
-        // "S00001" if id = 1
-        // "S99999" if id = 99999
-        // "S100000" if id = 100000
-        $storeCode = sprintf('S%\'.05d', Store::count() + 1);
         return [
-            'name'       => $this->faker->word,
-            'store_code' => $storeCode,
+            'name'       => $this->faker->word
         ];
     }
 }

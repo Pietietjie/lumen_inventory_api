@@ -12,6 +12,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Store extends Model {
     use HasFactory, SoftDeletes;
 
+    public static function boot() {
+
+        parent::boot();
+    
+        static::creating(function($store) {
+            event(new StoresCreatingEvent($store));
+        });
+    }
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'user_stores');

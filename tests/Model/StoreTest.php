@@ -57,4 +57,16 @@ class StoreTest extends TestCase
         $storeUsers = $this->store->managerUsers;
         $this->assertCount(0, $storeUsers);
     }
+
+    public function testStoreEventGenerateUniqueStoreCode()
+    {
+        $newStore = Store::factory()->create();
+
+        $newStoreNonFactory = new Store;
+        $newStoreNonFactory->name = 'non factory';
+        $newStoreNonFactory->save();
+
+        $this->assertNotEquals($this->store->store_code, $newStore->store_code);
+        $this->assertNotEquals($this->store->store_code, $newStoreNonFactory->store_code);
+    }
 }
