@@ -4,20 +4,24 @@
 $router->group([
     'prefix' => 'item',
 ], function () use ($router) {
-    $router->post('add', [
+    $router->get('', [
+        'as' => 'item.view',
+        'uses' => 'ItemController@view',
+    ]);
+    $router->post('', [
         'as' => 'item.add',
         'uses' => 'ItemController@create',
     ]);
-    $router->put('update', [
+    $router->put('', [
         'as' => 'item.update',
         'uses' => 'ItemController@update',
-    ]);
-    $router->post('/restore', [
-        'as' => 'item.restore',
-        'uses' => 'ItemController@restore',
     ]);
     $router->delete('', [
         'as' => 'item.delete',
         'uses' => 'ItemController@delete',
+    ]);
+    $router->post('/restore', [
+        'as' => 'item.restore',
+        'uses' => 'ItemController@restore',
     ]);
 });
