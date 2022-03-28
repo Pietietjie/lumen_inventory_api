@@ -65,6 +65,16 @@ class Inventory extends Model {
         return CurrencyHelper::formatCurrency($this->potential_profit);
     }
 
+    public function getInventoryValueAttribute()
+    {
+        return $this->item_quantity * $this->purchase_price;
+    }
+
+    public function getDisplayInventoryValueAttribute()
+    {
+        return CurrencyHelper::formatCurrency($this->inventory_value);
+    }
+
     public function getFullJsonResponseArray()
     {
         return $this->only([
@@ -75,6 +85,8 @@ class Inventory extends Model {
             'display_sell_price',
             'purchase_price',
             'display_purchase_price',
+            'inventory_value',
+            'display_inventory_value',
         ]);
     }
 

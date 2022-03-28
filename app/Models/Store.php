@@ -57,12 +57,36 @@ class Store extends Model {
             : 0;
     }
 
+    public function getTotalPotentialProfitAttribute()
+    {
+        return $this->inventories->pluck('potential_profit')->sum();
+    }
+
+    public function getDisplayTotalPotentialProfitAttribute()
+    {
+        return CurrencyHelper::formatCurrency($this->total_potential_profit);
+    }
+
+    public function getTotalInventoryValueAttribute()
+    {
+        return $this->inventories->pluck('inventory_value')->sum();
+    }
+
+    public function getDisplayTotalInventoryValueAttribute()
+    {
+        return CurrencyHelper::formatCurrency($this->total_inventory_value);
+    }
+
     public function getFullJsonResponseArray()
     {
         return $this->only([
             'name',
             'store_code',
             'this_user_main_store',
+            'total_potential_profit',
+            'display_total_potential_profit',
+            'total_inventory_value',
+            'display_total_inventory_value',
         ]);
     }
 
