@@ -57,17 +57,6 @@ class Store extends Model {
             : 0;
     }
 
-    public function getTotalPotentialProfitAttribute()
-    {
-        dd($this->inventories->pluck('potential_profit'));
-        return $this->item_quantity * $this->markup_price;
-    }
-
-    public function getDisplayPotentialProfitAttribute()
-    {
-        return CurrencyHelper::formatCurrency($this->total_potential_profit);
-    }
-
     public function getFullJsonResponseArray()
     {
         return $this->only([
