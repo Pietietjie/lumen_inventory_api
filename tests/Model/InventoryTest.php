@@ -396,4 +396,80 @@ class InventoryTest extends TestCase
         $this->assertEquals('R15 000.00', $this->inventory->display_potential_profit);
     }
 
+    public function testInventoryAttributePurchasePrice()
+    {
+        $item = Item::factory()->create([
+            'default_price'  => 100,
+        ]);
+        $this->inventory->item_id           = $item->id;
+        $this->inventory->store_item_price  = null;
+        $this->inventory->save();
+
+        $this->assertEquals(100, $this->inventory->purchase_price);
+    }
+
+    public function testInventoryAttributePurchasePriceInventoryPrice()
+    {
+        $item = Item::factory()->create([
+            'default_price'  => 100,
+        ]);
+        $this->inventory->item_id           = $item->id;
+        $this->inventory->store_item_price  = 150;
+        $this->inventory->save();
+
+        $this->assertEquals(150, $this->inventory->purchase_price);
+    }
+
+    public function testInventoryAttributeDisplayPurchasePrice()
+    {
+        Config::set('currency.symbol', 'R');
+        $item = Item::factory()->create([
+            'default_price'  => 100,
+        ]);
+        $this->inventory->item_id           = $item->id;
+        $this->inventory->store_item_price  = null;
+        $this->inventory->save();
+
+        $this->assertEquals('R100.00', $this->inventory->display_purchase_price);
+    }
+
+    public function testInventoryAttributeDisplayPurchasePriceUSD()
+    {
+        Config::set('currency.symbol', '$');
+        $item = Item::factory()->create([
+            'default_price'  => 100,
+        ]);
+        $this->inventory->item_id           = $item->id;
+        $this->inventory->store_item_price  = null;
+        $this->inventory->save();
+
+        $this->assertEquals('$100.00', $this->inventory->display_purchase_price);
+    }
+
+    public function testInventoryAttributeDisplayPurchasePriceWithCents()
+    {
+        Config::set('currency.symbol', 'R');
+        $item = Item::factory()->create([
+            'default_price'  => 99.9,
+        ]);
+        $this->inventory->item_id           = $item->id;
+        $this->inventory->store_item_price  = null;
+        $this->inventory->save();
+
+        $this->assertEquals('R99.90', $this->inventory->display_purchase_price);
+    }
+
+    public function testInventoryAttributeDisplayPurchasePriceWithThousands()
+    {
+        Config::set('currency.symbol', 'R');
+        $item = Item::factory()->create([
+            'default_price'  => 1001000,
+        ]);
+        $this->inventory->item_id           = $item->id;
+        $this->inventory->store_item_price  = null;
+        $this->inventory->save();
+
+        $this->assertEquals('R1 001 000.00', $this->inventory->display_purchase_price);
+    }
+
 }

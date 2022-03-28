@@ -21,11 +21,19 @@ class Inventory extends Model {
         return $this->belongsTo(Store::class);
     }
 
+    public function getPurchasePriceAttribute()
+    {
+        return $this->store_item_price ?? $this->item->default_price;
+    }
+
+    public function getDisplayPurchasePriceAttribute()
+    {
+        return CurrencyHelper::formatCurrency($this->purchase_price);
+    }
+
     public function getSellPriceAttribute()
     {
-        $item = $this->item;
-        $itemPrice = $this->store_item_price ?? $item->default_price;
-        return $itemPrice + $this->markup_price;
+        return $this->purchase_price + $this->markup_price;
     }
 
     public function getDisplaySellPriceAttribute()
@@ -35,10 +43,7 @@ class Inventory extends Model {
 
     public function getMarkupPriceAttribute()
     {
-        $item = $this->item;
-        $itemPrice = $this->store_item_price ?? $item->default_price;
-        $itemMarkup = $this->store_item_markup ?? $item->default_markup;
-        return $itemPrice * $itemMarkup;
+        return $this->purchase_price * ($this->store_item_markup ?? $this->item->default_markup);
     }
 
     public function getDisplayMarkupPriceAttribute()
