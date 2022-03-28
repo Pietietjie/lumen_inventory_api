@@ -10,5 +10,6 @@ $router->group([
         'middleware' => 'auth',
     ], function () use ($router) {
         require 'items.php';
+        require 'inventories.php';
     });
 });

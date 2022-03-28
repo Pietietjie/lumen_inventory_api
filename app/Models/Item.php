@@ -40,4 +40,26 @@ class Item extends Model {
         return CurrencyHelper::formatCurrency($this->default_markup_price);
     }
 
+    public function getFullJsonResponseArray()
+    {
+        return $this->only([
+            'name',
+            'ean13_bar_code',
+            'default_price',
+            'default_markup',
+            'default_markup_price',
+            'display_default_markup_price',
+            'default_sell_price',
+            'display_default_sell_price',
+        ]);
+    }
+
+    public function getSimplifiedJsonResponseArray()
+    {
+        return $this->only([
+            'name',
+            'ean13_bar_code',
+        ]);
+    }
+
 }

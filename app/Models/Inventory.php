@@ -11,6 +11,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Inventory extends Model {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'item_quantity', 'store_item_price', 'store_item_markup',
+    ];
+
     public function item(): BelongsTo
     {
         return $this->belongsTo(Item::class);
@@ -59,6 +63,19 @@ class Inventory extends Model {
     public function getDisplayPotentialProfitAttribute()
     {
         return CurrencyHelper::formatCurrency($this->potential_profit);
+    }
+
+    public function getFullJsonResponseArray()
+    {
+        return $this->only([
+            'item_quantity',
+            'markup_price',
+            'display_markup_price',
+            'sell_price',
+            'display_sell_price',
+            'purchase_price',
+            'display_purchase_price',
+        ]);
     }
 
 }
