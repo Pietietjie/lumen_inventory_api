@@ -20,7 +20,7 @@ class ItemController extends Controller
                 'string',
                 'digits:13',
                 'numeric',
-                Rule::unique('items', 'ean13_bar_code')->where(
+                Rule::exists('items', 'ean13_bar_code')->where(
                     fn ($query) => $query->where('deleted_at', null)
                 ),
             ],
