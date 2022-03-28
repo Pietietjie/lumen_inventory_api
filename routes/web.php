@@ -11,5 +11,6 @@ $router->group([
     ], function () use ($router) {
         require 'items.php';
         require 'inventories.php';
+        require 'stores.php';
     });
 });
